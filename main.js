@@ -7,7 +7,7 @@ let models = [
     },
     {
         name: "Audi A8",
-        image: "img/audi-a4.jpg",
+        image: "img/audi-a8.jpg",
         link: "http://www.arabalar.com.tr/audi/a4/2022/2-0-fsi"
     },
     {
@@ -17,12 +17,40 @@ let models = [
     }
 ]
 
-var index = 0;
+var index = 1;
+var slaytCount = models.length;
 
-// Slider elemanları dom ile ui ekrana eklendi
-document.querySelector('.card-title').textContent = models[index].name;
+showSlide(index);
 
-document.querySelector('.card-img-top').setAttribute('src',models[index].image);
+const prevArrow = document.querySelector('.fa-arrow-left');
+const nextArrow = document.querySelector('.fa-arrow-right');
 
-document.querySelector('.card-link').setAttribute('href',models[index].link);
+
+prevArrow.addEventListener('click', function () {
+    index--;
+    showSlide(index);
+    console.log(index)
+});
+nextArrow.addEventListener('click', function () {
+    index++;
+    showSlide(index);
+    console.log(index)
+});
+
+function showSlide(i) {
+    index = i;
+
+    if(i < 0) {
+        index = slaytCount - 1;
+    } else if (i >= slaytCount - 1) {
+        index = 0;
+    }
+
+    // Slider elemanları dom ile ui ekrana eklendi
+    document.querySelector('.card-title').textContent = models[index].name;
+
+    document.querySelector('.card-img-top').setAttribute('src',models[index].image);
+
+    document.querySelector('.card-link').setAttribute('href',models[index].link);
+}
 
